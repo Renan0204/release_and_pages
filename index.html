@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Revisão Prova</title>
+    <meta name="description" content="Site estático básico para GitHub Pages." />
+    <style>
+        :root {
+            --bg: #0b1020;
+            --card: #0f1530;
+            --text: #e8ecf1;
+            --muted: #b6c0d1;
+            --accent: #7aa2ff;
+            --accent-2: #7cffc4;
+            --radius: 16px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+            --grad: radial-gradient(1200px 800px at 10% -10%, rgba(122, 162, 255, .18), transparent 60%),
+                radial-gradient(1000px 700px at 110% 10%, rgba(124, 255, 196, .12), transparent 60%),
+                linear-gradient(180deg, #0a0f21 0%, #0a0d18 100%);
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg: #f7f9ff;
+                --card: #ffffff;
+                --text: #111827;
+                --muted: #4b5563;
+                --accent: #335dff;
+                --accent-2: #10b981;
+                --grad: radial-gradient(1200px 800px at 0% -10%, rgba(51, 93, 255, .10), transparent 60%),
+                    radial-gradient(1000px 700px at 120% 10%, rgba(16, 185, 129, .08), transparent 60%),
+                    linear-gradient(180deg, #f7faff 0%, #f4f7ff 100%);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+            color: var(--text);
+            background: var(--grad), var(--bg);
+            background-attachment: fixed;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 12px 0 20px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+            letter-spacing: .3px;
+        }
+
+        .badge {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            box-shadow: 0 6px 20px rgba(0, 0, 0, .25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .badge::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(18px 18px at 10px 10px, rgba(255, 255, 255, .6), transparent 60%);
+            mix-blend-mode: overlay;
+        }
+
+        .nav a {
+            color: var(--muted);
+            text-decoration: none;
+            margin-left: 14px;
+            font-weight: 600;
+        }
+
+        .nav a:hover {
+            color: var(--text);
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: 28px;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: color-mix(in oklab, var(--card), transparent 10%);
+            border: 1px solid color-mix(in oklab, var(--text), transparent 90%);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: clamp(18px, 4vw, 28px);
+            backdrop-filter: saturate(120%) blur(6px);
+        }
+
+        .title {
+            font-size: clamp(28px, 4.2vw, 46px);
+            line-height: 1.1;
+            margin: 6px 0 10px;
+            letter-spacing: .2px;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-size: clamp(14px, 2.2vw, 18px);
+            margin-bottom: 18px;
+        }
+
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #0b1020;
+            font-weight: 800;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 12px;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, .35);
+            transition: transform .08s ease, box-shadow .2s ease;
+        }
+
+        .cta:hover {
+            transform: translateY(-1px);
+        }
+
+        .cta:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+        }
+
+        .cta.secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid color-mix(in oklab, var(--text), transparent 80%);
+            box-shadow: none;
+            font-weight: 700;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .panel {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 520px) {
+            .panel {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tile {
+            background: color-mix(in oklab, var(--card), transparent 5%);
+            border: 1px dashed color-mix(in oklab, var(--text), transparent 82%);
+            border-radius: 14px;
+            padding: 14px;
+        }
+
+        .tile h3 {
+            margin: 6px 0 6px;
+            font-size: 16px;
+        }
+
+        .tile p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 24px 0;
+            color: var(--muted);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        code {
+            background: color-mix(in oklab, var(--card), transparent 4%);
+            border: 1px solid color-mix(in oklab, var(--text), transparent 88%);
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a class="logo" href="#">
+                <span class="badge" aria-hidden="true"></span>
+                <span>Revisão Prova</span>
+            </a>
+            <nav class="nav" aria-label="Navegação">
+                <a href="#inicio">Início</a>
+                <a href="#recursos">Recursos</a>
+                <a href="#sobre">Sobre</a>
+            </nav>
+        </header>
+
+        <main id="inicio" class="hero">
+            <section class="card">
+                <p style="margin:0;color:var(--muted);font-weight:700;letter-spacing:.4px;">GitHub Pages • Deploy
+                    automático</p>
+                <h1 class="title">Site simples, rápido e elegante.</h1>
+                <p class="subtitle">
+                    Esta página é um template minimalista pronto para publicar no GitHub Pages.
+                    Edite o conteúdo, suba para a branch <code>main</code> e o deploy acontece sozinho.
+                </p>
+                <div class="actions">
+                    <a class="cta" href="#recursos">Ver recursos</a>
+                    <a class="cta secondary" href="https://github.com/" target="_blank" rel="noopener">Abrir GitHub</a>
+                </div>
+            </section>
+
+            <aside class="card">
+                <div class="panel" id="recursos">
+                    <div class="tile">
+                        <h3>Responsivo</h3>
+                        <p>Layout que se adapta bem do celular ao desktop sem esforço.</p>
+                    </div>
+                    <div class="tile">
+                        <h3>Sem dependências</h3>
+                        <p>HTML + CSS puro. Rápido para carregar, fácil de manter.</p>
+                    </div>
+                    <div class="tile">
+                        <h3>Dark/Light</h3>
+                        <p>Respeita o tema do sistema com <code>prefers-color-scheme</code>.</p>
+                    </div>
+                    <div class="tile">
+                        <h3>Pronto pro Pages</h3>
+                        <p>Combine com um workflow de deploy “on push”.</p>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <section id="sobre" class="card" style="margin-top:24px">
+            <h2 style="margin:6px 0 8px;font-size:20px">Como publicar</h2>
+            <ol style="margin:0;padding-left:18px">
+                <li>Coloque este arquivo como <code>index.html</code> na raiz do repositório.</li>
+                <li>Faça commit e push na branch <code>main</code>.</li>
+                <li>Nas configurações do repositório, ative <strong>Settings → Pages → Source: GitHub Actions</strong>.
+                </li>
+            </ol>
+            <p style="margin-top:10px;color:var(--muted)">Dica: personalize cores alterando as variáveis CSS no início
+                do arquivo.</p>
+        </section>
+
+        <footer>
+            <span id="year"></span> • Feito para testes no GitHub Pages
+        </footer>
+    </div>
+
+    <script>
+        // Atualiza o ano automaticamente
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
