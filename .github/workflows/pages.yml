@@ -2,13 +2,13 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]        # dispara em todo push na main
-  workflow_dispatch:        # opcional: botão "Run workflow"
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write              # necessário para publicar no Pages
-  id-token: write           # necessário para OIDC no deploy
+  pages: write
+  id-token: write
 
 concurrency:
   group: "pages"
@@ -21,13 +21,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Se o site já está pronto (HTML/CSS/JS), só copie para "dist"
-      - name: Prepare artifact
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build static site
         run: |
           mkdir -p dist
-          # copie só o que precisa; exemplo simples:
           cp index.html dist/
-          # se tiver assets:
+          # Se tiver assets:
           # cp -r css js images dist/
 
       - name: Upload artifact
