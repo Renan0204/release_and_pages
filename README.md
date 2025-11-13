@@ -9,4 +9,4 @@ Site estático de estudo com deploy automático no GitHub Pages. O objetivo é p
 - **CI/CD:** GitHub Actions com deploy a cada push na `main`.
 
 URL publicada:
-https://Renan0204.github.io/revisao_prova/
+https://renan0204.github.io/release_and_pages/
