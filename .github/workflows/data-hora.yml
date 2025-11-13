@@ -1,0 +1,38 @@
+name: Data e Hora
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  show-time:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Data/Hora – São Paulo e UTC
+        id: times
+        run: |
+          SP="$(TZ=America/Sao_Paulo date +"%Y-%m-%d %H:%M:%S %Z")"
+          UTC="$(date -u +"%Y-%m-%d %H:%M:%S UTC")"
+
+          echo "SP=$SP"   >> "$GITHUB_OUTPUT"
+          echo "UTC=$UTC" >> "$GITHUB_OUTPUT"
+
+          echo "::notice title=São Paulo::$SP"
+          echo "::notice title=UTC::$UTC"
+
+          {
+            echo "## Data e hora"
+            echo ""
+            echo "| Fuso | Agora |"
+            echo "|------|-------|"
+            echo "| America/Sao_Paulo | $SP |"
+            echo "| UTC               | $UTC |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Echo simples (logs)
+        run: |
+          echo "São Paulo: ${{ steps.times.outputs.SP }}"
+          echo "UTC:       ${{ steps.times.outputs.UTC }}"
